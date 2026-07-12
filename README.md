@@ -1,16 +1,40 @@
-# React + Vite
+# Trivia Quiz App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sebuah aplikasi web berbasis React yang menyajikan permainan kuis trivia interaktif dengan data real-time dari OpenTDB API. Proyek ini dibangun dengan fokus pada arsitektur state management yang bersih menggunakan Custom Hooks dan React Reducer, serta antarmuka pengguna yang minimalis dan responsif.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Fitur Utama
 
-## React Compiler
+* **Dynamic Quiz Fetching:** Mengambil soal kuis secara real-time berdasarkan kategori, jumlah soal, dan tingkat kesulitan melalui OpenTDB API.
+* **Robust State Management:** Menggunakan pola `useReducer` untuk mengelola state game yang kompleks (skor, sisa waktu, jawaban pengguna, status permainan) secara terpusat.
+* **Smart Timer System:** Sistem penghitung waktu mundur otomatis per soal dengan dukungan konfigurasi waktu kustom (termasuk mode *unlimited*).
+* **Responsive & Adaptive UI:** Desain antarmuka modern yang bersih menggunakan Tailwind CSS dengan feedback visual instan untuk jawaban benar/salah.
+* **HTML Entity Decoding:** Dilengkapi dengan utility decoder untuk memastikan teks soal dari API bersih dari karakter entitas HTML mentah.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Core Framework:** React.js (v18+)
+* **Routing:** React Router DOM
+* **Styling:** Tailwind CSS
+* **State & Logic:** React Context (via Outlet Context) & `useReducer`
+* **Data Fetching:** Fetch API / OpenTDB (Open Trivia Database)
+
+---
+
+## 📂 Struktur Arsitektur Kode
+
+Proyek ini menerapkan pemisahan logika bisnis dari komponen UI untuk menjaga kode tetap *scalable* dan mudah dirawat:
+
+```text
+src/
+├── components/       # Komponen UI yang reusable
+├── hooks/
+│   └── useGamePlay.js # Logika inti permainan (state engine via useReducer)
+├── pages/
+│   ├── Start.js      # Halaman konfigurasi awal & setup kuis
+│   ├── Play.js       # Halaman arena permainan (Timer, Pertanyaan, Pilihan)
+│   └── Finish.js     # Halaman ringkasan skor dan hasil akhir
+└── App.js            # Entry point & layouting router
